@@ -7,21 +7,18 @@ use Overblog\GraphiQLBundle\Config\GraphQLEndpoint\RouteResolver;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
+use function Webmozart\Assert\Tests\StaticAnalysis\string;
 
 final class RouteResolverTest extends TestCase
 {
-    /** @var RouterInterface|MockObject */
-    protected $router;
+    protected RouterInterface&MockObject $router;
 
     public function setUp(): void
     {
         $this->router = $this->createMock(RouterInterface::class);
     }
 
-    /**
-     * @return RouteResolver
-     */
-    private function subject(array $routeCollection)
+    private function subject(array $routeCollection): RouteResolver
     {
         return new RouteResolver(
             $this->router,
@@ -29,7 +26,7 @@ final class RouteResolverTest extends TestCase
         );
     }
 
-    public function testInvalidRoute()
+    public function testInvalidRoute(): void
     {
         $routeResolver = $this->subject([]);
 
@@ -39,15 +36,17 @@ final class RouteResolverTest extends TestCase
         $routeResolver->getDefault();
     }
 
-    public function testArrayRoutes()
+    public function testArrayRoutes(): void
     {
-        $this->router->expects($this->exactly(3))
+        $matcher = $this->exactly(3);
+        $this->router->expects($matcher)
             ->method('generate')
-            ->withConsecutive(
-                ['route_schema_default'],
-                ['route_schema_default'],
-                ['route_schema_star_wars']
-            )
+            ->willReturnCallback(function (string $key, string $value) use ($matcher) {
+                return match ($matcher->numberOfInvocations()) {
+                    0, 1 => ['route_schema_default'],
+                    2 => ['route_schema_star_wars']
+                };
+            })
             ->willReturnOnConsecutiveCalls('/', '/', '/star-wars');
 
         $routeCollection = [

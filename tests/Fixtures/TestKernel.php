@@ -23,7 +23,7 @@ final class TestKernel extends AbstractTestKernel
     /**
      * {@inheritdoc}
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container) {
             $container->loadFromExtension('framework', [

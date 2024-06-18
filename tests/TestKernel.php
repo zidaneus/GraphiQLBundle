@@ -6,11 +6,11 @@ use Symfony\Component\HttpKernel\Kernel;
 
 abstract class TestKernel extends Kernel
 {
-    private $testCase;
+    private mixed $testCase;
 
     public function __construct($environment, $debug, $testCase = null)
     {
-        $this->testCase = null !== $testCase ? $testCase : false;
+        $this->testCase = $testCase ?? false;
         parent::__construct($environment, $debug);
     }
 
@@ -24,7 +24,7 @@ abstract class TestKernel extends Kernel
         return sys_get_temp_dir().'/OverblogGraphQLBundle/'.Kernel::VERSION.'/'.$this->testCase.'/logs';
     }
 
-    public function isBooted()
+    public function isBooted(): bool
     {
         return $this->booted;
     }

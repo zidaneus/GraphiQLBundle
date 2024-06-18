@@ -9,7 +9,7 @@ final class GraphiQLControllerTest extends TestCase
 {
     public function testInvalidSchema(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $client->request('GET', '/graphiql/second');
         $response = $client->getResponse();
@@ -20,7 +20,7 @@ final class GraphiQLControllerTest extends TestCase
 
     public function testDefaultSchema(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $client->request('GET', '/graphiql');
         $response = $client->getResponse();
@@ -32,7 +32,7 @@ final class GraphiQLControllerTest extends TestCase
 
     public function testDefaultSchemaViaMultipleRoute(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $client->request('GET', '/graphiql/default');
         $response = $client->getResponse();

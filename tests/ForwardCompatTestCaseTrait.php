@@ -28,7 +28,7 @@ if (70000 <= \PHP_VERSION_ID && (new \ReflectionMethod(WebTestCase::class, 'tear
      */
     trait ForwardCompatTestCaseTrait
     {
-        protected function tearDown()
+        protected function tearDown(): void
         {
             static::ensureKernelShutdown();
             static::$kernel = null;

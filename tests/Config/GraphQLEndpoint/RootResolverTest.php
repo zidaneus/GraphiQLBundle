@@ -8,15 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 final class RootResolverTest extends TestCase
 {
-    /**
-     * @return RootResolver
-     */
-    private function subject()
+    private function subject(): RootResolver
     {
         return new RootResolver();
     }
 
-    public function testInvalidSchema()
+    public function testInvalidSchema(): void
     {
         $rootResolver = $this->subject();
 
@@ -26,7 +23,7 @@ final class RootResolverTest extends TestCase
         $rootResolver->getBySchema('any');
     }
 
-    public function testDefaultSchema()
+    public function testDefaultSchema(): void
     {
         $rootResolver = $this->subject();
 

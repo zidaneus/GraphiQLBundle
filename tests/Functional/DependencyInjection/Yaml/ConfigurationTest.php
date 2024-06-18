@@ -14,13 +14,13 @@ final class ConfigurationTest extends TestCase
 
     public function setUp(): void
     {
-        static::bootKernel(['test_case' => str_replace('\\', '_', __NAMESPACE__)]);
+        self::bootKernel(['test_case' => str_replace('\\', '_', __NAMESPACE__)]);
     }
 
-    public function testSuccessConfiguration()
+    public function testSuccessConfiguration(): void
     {
         /** @var TestKernel $kernel */
-        $kernel = static::$kernel;
+        $kernel = self::$kernel;
 
         $this->assertTrue($kernel->isBooted());
     }

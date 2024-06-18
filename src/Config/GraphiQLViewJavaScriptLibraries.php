@@ -2,47 +2,26 @@
 
 namespace Overblog\GraphiQLBundle\Config;
 
-final class GraphiQLViewJavaScriptLibraries
+final readonly class GraphiQLViewJavaScriptLibraries
 {
-    /** @var string */
-    private $graphiQLVersion;
-
-    /** @var string */
-    private $reactVersion;
-
-    /** @var string */
-    private $fetchVersion;
-
     public function __construct(
-        $graphiQLVersion,
-        $reactVersion,
-        $fetchVersion
+        private string $graphiQLVersion,
+        private string $reactVersion,
+        private string $fetchVersion
     ) {
-        $this->graphiQLVersion = $graphiQLVersion;
-        $this->reactVersion = $reactVersion;
-        $this->fetchVersion = $fetchVersion;
     }
 
-    /**
-     * @return string
-     */
-    public function getGraphiQLVersion()
+    public function getGraphiQLVersion(): string
     {
         return $this->graphiQLVersion;
     }
 
-    /**
-     * @return string
-     */
-    public function getReactVersion()
+    public function getReactVersion(): string
     {
         return $this->reactVersion;
     }
 
-    /**
-     * @return string
-     */
-    public function getFetchVersion()
+    public function getFetchVersion(): string
     {
         return $this->fetchVersion;
     }

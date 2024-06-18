@@ -6,7 +6,7 @@ use Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint;
 
 final class RootResolver implements GraphiQLControllerEndpoint
 {
-    public function getBySchema($name)
+    public function getBySchema(string $name): string
     {
         if ('default' === $name) {
             return '/';
@@ -15,7 +15,7 @@ final class RootResolver implements GraphiQLControllerEndpoint
         throw GraphQLEndpointInvalidSchemaException::forSchemaAndResolver($name, self::class);
     }
 
-    public function getDefault()
+    public function getDefault(): string
     {
         return $this->getBySchema('default');
     }

@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class GraphiQLControllerTest extends TestCase
 {
-    public function testDefaultSchema()
+    public function testDefaultSchema(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
 
         $client->request('GET', '/graphiql');
         $response = $client->getResponse();

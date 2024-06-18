@@ -2,32 +2,18 @@
 
 namespace Overblog\GraphiQLBundle\Config;
 
-final class GraphiQLViewConfig
+final readonly class GraphiQLViewConfig
 {
-    /** @var GraphiQLViewJavaScriptLibraries */
-    private $javaScriptLibraries;
-
-    /** @var string */
-    private $template;
-
-    public function __construct(GraphiQLViewJavaScriptLibraries $javaScriptLibraries, $template)
+    public function __construct(private GraphiQLViewJavaScriptLibraries $javaScriptLibraries, private string $template)
     {
-        $this->javaScriptLibraries = $javaScriptLibraries;
-        $this->template = $template;
     }
 
-    /**
-     * @return GraphiQLViewJavaScriptLibraries
-     */
-    public function getJavaScriptLibraries()
+    public function getJavaScriptLibraries(): GraphiQLViewJavaScriptLibraries
     {
         return $this->javaScriptLibraries;
     }
 
-    /**
-     * @return string
-     */
-    public function getTemplate()
+    public function getTemplate(): string
     {
         return $this->template;
     }

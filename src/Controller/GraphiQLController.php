@@ -7,34 +7,16 @@ use Overblog\GraphiQLBundle\Config\GraphiQLViewConfig;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as TwigEnvironment;
 
-final class GraphiQLController
+final readonly class GraphiQLController
 {
-    /**
-     * @var TwigEnvironment
-     */
-    private $twig;
-
-    /**
-     * @var GraphiQLViewConfig
-     */
-    private $viewConfig;
-
-    /**
-     * @var GraphiQLControllerEndpoint
-     */
-    private $graphQLEndpoint;
-
     public function __construct(
-        TwigEnvironment $twig,
-        GraphiQLViewConfig $viewConfig,
-        GraphiQLControllerEndpoint $graphQLEndpoint
+        private TwigEnvironment $twig,
+        private GraphiQLViewConfig $viewConfig,
+        private GraphiQLControllerEndpoint $graphQLEndpoint
     ) {
-        $this->twig = $twig;
-        $this->viewConfig = $viewConfig;
-        $this->graphQLEndpoint = $graphQLEndpoint;
     }
 
-    public function indexAction($schemaName = null)
+    public function indexAction($schemaName = null): Response
     {
         $endpoint = null === $schemaName ? $this->graphQLEndpoint->getDefault() : $this->graphQLEndpoint->getBySchema($schemaName);
 

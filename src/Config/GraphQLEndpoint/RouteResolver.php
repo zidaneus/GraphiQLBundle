@@ -5,25 +5,13 @@ namespace Overblog\GraphiQLBundle\Config\GraphQLEndpoint;
 use Overblog\GraphiQLBundle\Config\GraphiQLControllerEndpoint;
 use Symfony\Component\Routing\RouterInterface;
 
-final class RouteResolver implements GraphiQLControllerEndpoint
+final readonly class RouteResolver implements GraphiQLControllerEndpoint
 {
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var array
-     */
-    private $routeCollection;
-
-    public function __construct(RouterInterface $router, array $routeCollection)
+    public function __construct(private RouterInterface $router, private array $routeCollection)
     {
-        $this->router = $router;
-        $this->routeCollection = $routeCollection;
     }
 
-    public function getBySchema($name)
+    public function getBySchema(string $name): string
     {
         $route = null;
 
@@ -42,7 +30,7 @@ final class RouteResolver implements GraphiQLControllerEndpoint
         return $this->router->generate(...$route);
     }
 
-    public function getDefault()
+    public function getDefault(): string
     {
         return $this->getBySchema('default');
     }
