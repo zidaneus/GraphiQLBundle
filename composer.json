@@ -1,5 +1,5 @@
 {
-    "name": "overblog/graphiql-bundle",
+    "name": "zidaneus/graphiql-bundle",
     "type": "symfony-bundle",
     "description": "Symfony GraphiQLBundle makes possible to render the UI into your symfony project",
     "keywords": [
